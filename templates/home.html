@@ -5,8 +5,21 @@
 
 {%block content%}
 <h1>Agency Pets Available</h1>
+<form action="/add" method='GET'>
+    <button class="btn btn-success">Add Pet</button>
+</form>
+{% for category,msg in get_flashed_messages(with_categories=true)%}
+{% if category=="add"%}
+<p>{{msg}}</p>
+{%endif%}
+{% endfor %}
+{% for pet in pets%}
+<div class="col">
+    <a href="/{{pet.id}}"><img src="{{pet.photo_url}}" alt="{{pet.name}}"></a><br>
+    <p>{{pet.name}} is {% if pet.available %}<b>available</b> {%else%} not available {%endif%}</p>
+</div>
+{%endfor%}
 
-<!-- Add all pet stuff here -->
 {%endblock%}
 
 </html>

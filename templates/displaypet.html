@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+
+{%block title%}{{pet.name}}{%endblock%}
+
+{%block content%}
+{% for category,msg in get_flashed_messages(with_categories=true)%}
+{% if category=="update"%}
+<p>{{msg}}</p>
+{%endif%}
+{% endfor %}
+<h2>{{pet.name}}</h2>
+<img src="{{pet.photo_url}}" alt="{{pet.name}}">
+<form action="POST">
+    {{ form.hidden_tag() }}
+
+    {% for field in form
+    if field.widget.input_type != 'hidden' %}
+    <p>
+        {{ field.label }}
+        {{ field }}
+
+        {% for error in field.errors %}
+        {{ error }}
+        {% endfor %}
+    </p>
+    {%endfor%}
+
+    <button formaction="/{{pet.id}}" type="submit" class="btn btn-success">Submit Changes</button><br>
+    <button formaction="/" formmethod="GET" class="btn btn-warning">Cancel</button>
+</form>
+{%endblock%}
