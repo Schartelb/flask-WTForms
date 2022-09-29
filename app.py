@@ -26,18 +26,19 @@ def add_pet():
     """Pet add form; handle adding."""
 
     form = PetForm()
-
+    pet = {}
     if form.validate_on_submit():
-        name = form.name.data
-        pet = Pet(name=name,
-                  species=form.species.data,
-                  photo_url=form.photo_url.data,
-                  age=form.age.data,
-                  notes=form.notes.data,
-                  available=form.available.data)
+        # for key, value in form.data.items():
+        # Pet(key =value)
+        pet = Pet(name=pet.name,
+                  species=pet.species,
+                  photo_url=pet.photo_url,
+                  age=pet.age,
+                  notes=pet.notes,
+                  available=pet.available)
         db.session.add(pet)
         db.session.commit()
-        flash(f"Added {name} to adoption list!", "add")
+        flash(f"Added {pet.name} to adoption list!", "add")
         return redirect("/")
     else:
         return render_template(
@@ -48,8 +49,6 @@ def add_pet():
 def display_edit_pet(pet_id):
     pet = Pet.query.get_or_404(pet_id)
     form = PetForm(obj=pet)
-    import pdb
-    pdb.set_trace()
     if form.validate_on_submit():
         pet.name = form.name.data
         pet.species = form.species.data

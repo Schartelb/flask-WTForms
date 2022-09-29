@@ -15,9 +15,10 @@
 {% endfor %}
 {% for pet in pets%}
 <div class="col">
-    <a href="/{{pet.id}}"><img src="{{pet.photo_url}}" alt="{{pet.name}}"></a><br>
-    <p>{{pet.name}} is {% if pet.available %}<b>available</b> {%else%} not available {%endif%}</p>
+    <a href="/{{pet.id}}"><img src="{{pet.photo_url}}" alt="{{pet.name}}" height="200px"></a><br>
+    <p>{{pet.name}} is {%if pet.available%}<b>Available</b>{%else%}Unavailable {%endif%}</p>
 </div>
+
 {%endfor%}
 
 {%endblock%}
